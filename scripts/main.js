@@ -33,7 +33,7 @@ function carregarArquivos()
             {id: "memoria_btn", src: "images/memoria_btnVolta.png"},
             {id: "sound_telaInicial", src: "sons/bg_telaInicial.mp3"}
         ]);
-     createjs.Sound.registerSound(preload.getResult("sound_telaInicial"));
+     //createjs.Sound.registerSound(preload.getResult("sound_telaInicial"));
 }
 
 function init()
@@ -52,7 +52,7 @@ function tick() {stage.update();}
 function tela_inicial()
 {
     var container = new createjs.Container();
-    //createjs.Sound.play("sound_telaInicial",{loop:-1, volume: 0.6});
+    createjs.Sound.play("sound_telaInicial",{loop:-1, volume: 0.6});
     
     var background = new createjs.Bitmap(preload.getResult("telaInicialBG"));
     var play_inicial = new createjs.Bitmap(preload.getResult("btn-play"));
