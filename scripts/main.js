@@ -29,6 +29,8 @@ function carregarArquivos()
             {id: "sala1_jogoMemoria", src: "images/jogo_da_memoria.png"},
             {id: "sala1", src: "images/sala1.png"},
             {id: "retrato", src: "images/retrato.png"},
+            {id: "memoria", src: "images/minijo-memoria.png"},
+            {id: "memoria_btn", src: "images/memoria_btnVolta.png"},
             {id: "sound_telaInicial", src: "sons/bg_telaInicial.mp3"}
         ]);
      //createjs.Sound.registerSound(preload.getResult("sound_telaInicial"));
@@ -50,7 +52,7 @@ function tick() {stage.update();}
 function tela_inicial()
 {
     var container = new createjs.Container();
-    createjs.Sound.play("sound_telaInicial",{loop:-1, volume: 0.6});
+    //createjs.Sound.play("sound_telaInicial",{loop:-1, volume: 0.6});
     
     var background = new createjs.Bitmap(preload.getResult("telaInicialBG"));
     var play_inicial = new createjs.Bitmap(preload.getResult("btn-play"));
@@ -68,8 +70,6 @@ function evtTela_inicial(evt)
 {
     if(evt.type = "click")
         trocaTela(telaAvatar());
-        //console.log("teste");
-        //createjs.Sound.play(preload.getResult("sound_telaInicial"));
 }
 //------------------------------------*
 
@@ -158,9 +158,9 @@ function retrato()
     var container = new createjs.Container();
     var background = new createjs.Bitmap(preload.getResult("retrato"));
     
-    var nomeCrianca = new createjs.Text(nome.toUpperCase(), "40px Arial", "#FFF");
-    nomeCrianca.x = 780;
-    nomeCrianca.y = 820;
+    var nomeCrianca = new createjs.Text(nome.toUpperCase(), "40px Arial", "#000");
+    nomeCrianca.x = 750;
+    nomeCrianca.y = 850;
     
     container.addChild(background);
     container.addChild(nomeCrianca);

@@ -30,18 +30,28 @@ function jogoDaMemoria()
     
     
     container = new createjs.Container();
+    var fundo = new createjs.Bitmap(preload.getResult("memoria"));
+    var btn = new createjs.Bitmap(preload.getResult("memoria_btn"));
+    btn.on("click", evt_voltaSala1);
+    container.addChild(fundo);
+    container.addChild(btn);
     container.addChild(retrato());
     shuffle(carta_simbolos, carta_objetos);
     
     return container;
 }
 
+function evt_voltaSala1(evt)
+{
+    if(evt.type == "click")
+        trocaTela(sala1());
+}
 
 function shuffle(cs, co)
 {
      //Um array para as cartas simbolos e objetos
-    var pos = [[0, 25], [250, 25], [500, 25], [750, 25], [1000, 25],
-               [0, 350], [250, 350], [500, 350], [750, 350], [1000, 350]];
+    var pos = [[50, 25], [306, 25], [562, 25], [818, 25], [1074, 25],
+               [50, 350], [306, 350], [562, 350], [818, 350], [1074, 350]];
     var i = 0, j, card, cardE;
     for(i; i < cs.length; i++)
     {
@@ -49,14 +59,14 @@ function shuffle(cs, co)
                      images: [img_enderecos_objetos[i]],
                      frames: [
 				                // x, y, width, height, imageIndex*, regX*, regY*
-				                [2, 48, 95, 166],
-				                [105, 44, 93, 173],
-				                [218, 39, 63, 178],
-				                [338, 39, 30, 185],
-				                [437, 39, 24, 185],
-				                [520, 43, 62, 178],
-				                [604, 44, 93, 173],
-			                 	[702, 48, 95, 166]
+				                [67, 45, 150, 210],
+				                [234, 45, 150, 210],
+				                [400, 45, 104, 210],
+				                [535, 45, 46, 210],
+				                [623, 45, 46, 210],
+				                [698, 45, 104, 210],
+				                [820, 45, 150, 210],
+			                 	[988, 40, 150, 210]
 			                 	],
                      framerate: 24,
                      animations: {
@@ -74,14 +84,14 @@ function shuffle(cs, co)
                      images: [img_enderecos_simbolos[i]],
                      frames: [
 				                // x, y, width, height, imageIndex*, regX*, regY*
-				                [2, 48, 95, 166],
-				                [105, 44, 93, 173],
-				                [218, 39, 63, 178],
-				                [338, 39, 30, 185],
-				                [437, 39, 24, 185],
-				                [520, 43, 62, 178],
-				                [604, 44, 93, 173],
-			                 	[702, 48, 95, 166]
+				                [67, 45, 150, 210],
+				                [234, 45, 150, 210],
+				                [400, 45, 104, 210],
+				                [535, 45, 46, 210],
+				                [623, 45, 46, 210],
+				                [698, 45, 104, 210],
+				                [820, 45, 150, 210],
+			                 	[988, 40, 150, 210]
 			                 	],
                      framerate: 24,
                      animations: {
