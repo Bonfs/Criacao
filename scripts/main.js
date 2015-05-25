@@ -33,7 +33,7 @@ function carregarArquivos()
             {id: "memoria_btn", src: "images/memoria_btnVolta.png"},
             {id: "sound_telaInicial", src: "sons/bg_telaInicial.mp3"}
         ]);
-     //createjs.Sound.registerSound(preload.getResult("sound_telaInicial"));
+     createjs.Sound.registerSound(preload.getResult("sound_telaInicial"));
 }
 
 function init()
