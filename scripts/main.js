@@ -59,7 +59,7 @@ function tick() {stage.update();}
 function tela_inicial()
 {
     var container = new createjs.Container();
-    createjs.Sound.play("sound_telaInicial",{loop:-1, volume: 0.6});
+    //createjs.Sound.play("sound_telaInicial",{loop:-1, volume: 0.6});
     
     var background = new createjs.Bitmap(preload.getResult("telaInicialBG"));
     var play_inicial = new createjs.Bitmap(preload.getResult("btn-play"));
