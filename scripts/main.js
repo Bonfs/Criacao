@@ -31,6 +31,13 @@ function carregarArquivos()
             {id: "retrato", src: "images/retrato.png"},
             {id: "memoria", src: "images/minijo-memoria.png"},
             {id: "memoria_btn", src: "images/memoria_btnVolta.png"},
+            {id: "encaixe_fundo", src: "images/mini-jogo-bau.png"},
+            {id: "encaixe_urso", src: "images/ursinho.png"},
+            {id: "encaixe_urso_sombra", src: "images/ursinho sombra.png"},
+            {id: "encaixe_boneca", src: "images/boneca.png"},
+            {id: "encaixe_boneca_sombra", src: "images/boneca sombra.png"},
+            {id: "encaixe_carro", src: "images/carro.png"},
+            {id: "encaixe_carro_sombra", src: "images/carro sombra.png"},
             {id: "sound_telaInicial", src: "sons/bg_telaInicial.mp3"}
         ]);
      //createjs.Sound.registerSound(preload.getResult("sound_telaInicial"));
@@ -123,6 +130,7 @@ function sala1()
     var container = new createjs.Container();
     var background = new createjs.Bitmap(preload.getResult("sala1"));
     var bau = new createjs.Bitmap(preload.getResult("sala1_bau"));
+    bau.on("click", evt_chamaJogoDasFormas);
     bau.scaleX = 0.8;
     bau.scaleY = 0.8;
     bau.x = 430;
@@ -144,6 +152,13 @@ function evt_chamaJogoDaMemoria(evt)
     if(evt.type == "click")
         trocaTela(jogoDaMemoria());
 }
+
+function evt_chamaJogoDasFormas(evt)
+{
+    if(evt.type == "click")
+        trocaTela(jogoDasFormas());
+}
+
 
 //------------------------------------*
 
