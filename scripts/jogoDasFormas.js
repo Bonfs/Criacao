@@ -6,19 +6,31 @@ function jogoDasFormas()
 {
     containerE = new createjs.Container();
     var fundo = new createjs.Bitmap(preload.getResult("encaixe_fundo"));
+    
     boneca_sombra = new createjs.Bitmap(preload.getResult("encaixe_boneca_sombra"));
+    boneca_sombra.scaleX = 0.6;
+    boneca_sombra.scaleY = 0.6;
     boneca_sombra.name = "boneca";
     boneca_sombra.x = 350;
     boneca_sombra.y = 270;
+    
     carro_sombra = new createjs.Bitmap(preload.getResult("encaixe_carro_sombra"));
+    carro_sombra.scaleX = 0.7;
+    carro_sombra.scaleY = 0.7;
     carro_sombra.name = "carro";
     carro_sombra.x = 350;
-    carro_sombra.y = 300;
+    carro_sombra.y = 320;
+    
     urso_sombra = new createjs.Bitmap(preload.getResult("encaixe_urso_sombra"));
+    urso_sombra.scaleX = 0.6;
+    urso_sombra.scaleY = 0.6;
     urso_sombra.name = "urso";
     urso_sombra.x = 350;
     urso_sombra.y = 270;
+    
     urso = new createjs.Bitmap(preload.getResult("encaixe_urso"));
+    urso.scaleX = 0.6;
+    urso.scaleY = 0.6;
     urso.on("click", arrastar);
     urso.on("pressmove", arrastar);
     urso.on("pressup", arrastar);
@@ -29,23 +41,27 @@ function jogoDasFormas()
     urso.bitmapCollide = bitmapCollide;
     
     carro = new createjs.Bitmap(preload.getResult("encaixe_carro"));
+    carro.scaleX = 0.7;
+    carro.scaleY = 0.7;
     carro.on("click", arrastar);
     carro.on("pressmove", arrastar);
     carro.on("pressup", arrastar);
     carro.name = "carro";
     carro.colou = false;
-    carro.x = 600;
-    carro.y = 550;
+    carro.x = 800;
+    carro.y = 430;
     carro.bitmapCollide = bitmapCollide;
     
     boneca = new createjs.Bitmap(preload.getResult("encaixe_boneca"));
+    boneca.scaleX = 0.6;
+    boneca.scaleY = 0.6;
     boneca.on("click", arrastar);
     boneca.on("pressmove", arrastar);
     boneca.on("pressup", arrastar);
     boneca.name = "boneca";
     boneca.colou = false;
-    boneca.x = 600;
-    boneca.y = 550;
+    boneca.x = 350;
+    boneca.y = 600;
     boneca.bitmapCollide = bitmapCollide;
     
     imagens.push(urso);
@@ -59,6 +75,8 @@ function jogoDasFormas()
     containerE.addChild(fundo);
     containerE.addChild(retrato());
     containerE.addChild(urso);
+    containerE.addChild(carro);
+    containerE.addChild(boneca);
     containerE.addChild(urso_sombra);
     
     return containerE;
@@ -94,11 +112,11 @@ function arrastar(evt)
                 evt.target.colou = true;
                 containerE.removeChild(evt.target);
                 containerE.removeChild(sombras[0]);
-                imagens.splice(0,1);
+                //imagens.splice(0,1);
                 sombras.splice(0,1);
                 //forma2.x = can.width/2 - forma2.getBounds().width*1.5;
                 //forma2.y = can.height/2 - forma2.getBounds().height;
-                containerE.addChild(imagens[0]);
+                //containerE.addChild(imagens[0]);
                 containerE.addChild(sombras[0]);
                 stage.update();
 		  }

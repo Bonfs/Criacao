@@ -27,6 +27,7 @@ function carregarArquivos()
             {id: "tela_avatar", src: "images/placeholder_Selecao.png"},
             {id: "sala1_bau", src: "images/bau.png"},
             {id: "sala1_jogoMemoria", src: "images/jogo_da_memoria.png"},
+            {id: "sala1_bola", src: "images/bolamove2.png"},
             {id: "sala1", src: "images/sala1.png"},
             {id: "retrato", src: "images/retrato.png"},
             {id: "memoria", src: "images/minijo-memoria.png"},
@@ -140,11 +141,69 @@ function sala1()
     jogo.x = 940;
     jogo.y = 530;
     
+    var bola = {
+        "framerate":24,
+        "images":[preload.getResult("sala1_bola")],
+        "frames":[
+            [0, 0, 256, 256, 0, -142, -123],
+            [256, 0, 256, 256, 0, -142, -123],
+            [512, 0, 256, 256, 0, -142, -123],
+            [768, 0, 256, 256, 0, -142, -123],
+            [1024, 0, 256, 256, 0, -142, -123],
+            [1280, 0, 256, 256, 0, -142, -123],
+            [1536, 0, 256, 256, 0, -142, -123],
+            [1792, 0, 256, 256, 0, -142, -123],
+            [2048, 0, 256, 256, 0, -142, -123],
+            [2304, 0, 256, 256, 0, -142, -123],
+            [2560, 0, 256, 256, 0, -142, -123],
+            [2816, 0, 256, 256, 0, -142, -123],
+            [3072, 0, 256, 256, 0, -142, -123],
+            [3328, 0, 256, 256, 0, -142, -123],
+            [3584, 0, 256, 256, 0, -142, -123],
+            [0, 256, 256, 256, 0, -142, -123],
+            [256, 256, 256, 256, 0, -142, -123],
+            [512, 256, 256, 256, 0, -142, -123],
+            [768, 256, 256, 256, 0, -142, -123],
+            [1024, 256, 256, 256, 0, -142, -123],
+            [1280, 256, 256, 256, 0, -142, -123],
+            [1536, 256, 256, 256, 0, -142, -123],
+            [1792, 256, 256, 256, 0, -142, -123],
+            [2048, 256, 256, 256, 0, -142, -123],
+            [2304, 256, 256, 256, 0, -142, -123],
+            [2560, 256, 256, 256, 0, -142, -123],
+            [2816, 256, 256, 256, 0, -142, -123],
+            [3072, 256, 256, 256, 0, -142, -123],
+            [3328, 256, 256, 256, 0, -142, -123],
+            [3584, 256, 256, 256, 0, -142, -123],
+            [0, 512, 256, 256, 0, -142, -123],
+            [256, 512, 256, 256, 0, -142, -123],
+            [512, 512, 256, 256, 0, -142, -123],
+            [768, 512, 256, 256, 0, -142, -123],
+            [1024, 512, 256, 256, 0, -142, -123]
+        ],
+        "animations":{
+            bolaGirando:[0, 34, "bolaParada"],
+            bolaParada:[0]
+        }
+    }
+    var bolaSheet = new createjs.SpriteSheet(bola);
+    var bolaAnima = new createjs.Sprite(bolaSheet, "bolaParada");
+    bolaAnima.on("click", evt_animaBola);
+    bolaAnima.x = 50;
+    bolaAnima.y = 500;
+    
     container.addChild(background);
     container.addChild(bau);
     container.addChild(jogo);
+    container.addChild(bolaAnima);
     container.addChild(retrato());
     return container;
+}
+
+function evt_animaBola(evt)
+{
+    if(evt.type == "click")
+        evt.target.gotoAndPlay("bolaGirando");
 }
 
 function evt_chamaJogoDaMemoria(evt)
@@ -172,6 +231,10 @@ function retrato()
 {
     var container = new createjs.Container();
     var background = new createjs.Bitmap(preload.getResult("retrato"));
+    //background.scaleX = 0.5;
+    //background.scaleY = 0.5;
+    //background.x = stage.canvas.width/2;
+    //background.y = stage.canvas.height/2;
     
     var nomeCrianca = new createjs.Text(nome.toUpperCase(), "40px Arial", "#000");
     nomeCrianca.x = 750;
