@@ -44,6 +44,8 @@ Carta.prototype.setCartaAnimation = function()
     if(this._carta != null)
     {
         this._carta_animation = new createjs.Sprite(this._carta, "back");
+        this._carta_animation.scaleX = 1.3;
+        this._carta_animation.scaleY = 1.3;
         this._carta_animation.pai = this;
         this._carta_animation.x = this.x;
         this._carta_animation.y = this.y;

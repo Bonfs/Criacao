@@ -23,6 +23,7 @@ function carregarArquivos()
             {id: "carta_plastico_objeto", src: "images/carta_plastico_objeto.png"},
             {id: "carta_vidro_objeto", src: "images/carta_vidro_objeto.png"},
             {id: "btn-play", src: "images/btn-play.png"},
+            {id: "btn-play2", src: "images/btn-play2.png"},
             {id: "telaInicialBG", src: "images/telaInicial.jpg"},
             {id: "tela_avatar", src: "images/placeholder_Selecao.png"},
             {id: "sala1_bau", src: "images/bau.png"},
@@ -39,7 +40,9 @@ function carregarArquivos()
             {id: "encaixe_boneca_sombra", src: "images/boneca sombra.png"},
             {id: "encaixe_carro", src: "images/carro.png"},
             {id: "encaixe_carro_sombra", src: "images/carro sombra.png"},
-            {id: "sound_telaInicial", src: "sons/bg_telaInicial.mp3"}
+            {id: "encaixe_btn", src: "images/encaixe_btnVolta.png"},
+            {id: "sound_telaInicial", src: "sons/bg_telaInicial.mp3"},
+            {id: "sound_flipCarta", src: "sons/page-flip-01a.mp3"}
         ]);
      //createjs.Sound.registerSound(preload.getResult("sound_telaInicial"));
 }
@@ -65,8 +68,6 @@ function tela_inicial()
     var background = new createjs.Bitmap(preload.getResult("telaInicialBG"));
     var play_inicial = new createjs.Bitmap(preload.getResult("btn-play"));
     play_inicial.on("click", evtTela_inicial);
-    play_inicial.x = 523;
-    play_inicial.y = 486;
     
     container.addChild(background);
     container.addChild(play_inicial);
@@ -87,7 +88,7 @@ function telaAvatar()
     var container = new createjs.Container();
     
     var background = new createjs.Bitmap(preload.getResult("tela_avatar"));
-    var play_avancar = new createjs.Bitmap(preload.getResult("btn-play"));
+    var play_avancar = new createjs.Bitmap(preload.getResult("btn-play2"));
     play_avancar.on("click", evt_telaAvatar);
     play_avancar.x = 950;
     play_avancar.y = 770;

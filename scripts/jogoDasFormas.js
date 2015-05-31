@@ -7,6 +7,9 @@ function jogoDasFormas()
     containerE = new createjs.Container();
     var fundo = new createjs.Bitmap(preload.getResult("encaixe_fundo"));
     
+    var btn = new createjs.Bitmap(preload.getResult("memoria_btn"));
+    btn.on("click", evt_voltaSala1);
+    
     boneca_sombra = new createjs.Bitmap(preload.getResult("encaixe_boneca_sombra"));
     boneca_sombra.scaleX = 0.6;
     boneca_sombra.scaleY = 0.6;
@@ -31,6 +34,7 @@ function jogoDasFormas()
     urso = new createjs.Bitmap(preload.getResult("encaixe_urso"));
     urso.scaleX = 0.6;
     urso.scaleY = 0.6;
+    //urso.offset = {x: -100, y: -100};
     urso.on("click", arrastar);
     urso.on("pressmove", arrastar);
     urso.on("pressup", arrastar);
@@ -43,6 +47,7 @@ function jogoDasFormas()
     carro = new createjs.Bitmap(preload.getResult("encaixe_carro"));
     carro.scaleX = 0.7;
     carro.scaleY = 0.7;
+    //carro.offset = {x: -100, y: -100};
     carro.on("click", arrastar);
     carro.on("pressmove", arrastar);
     carro.on("pressup", arrastar);
@@ -55,6 +60,9 @@ function jogoDasFormas()
     boneca = new createjs.Bitmap(preload.getResult("encaixe_boneca"));
     boneca.scaleX = 0.6;
     boneca.scaleY = 0.6;
+    //boneca.offset = {};
+    //boneca.offset.x = -100;
+   // boneca.offset.y = -100;
     boneca.on("click", arrastar);
     boneca.on("pressmove", arrastar);
     boneca.on("pressup", arrastar);
@@ -73,6 +81,7 @@ function jogoDasFormas()
     sombras.push(boneca_sombra);
     
     containerE.addChild(fundo);
+    containerE.addChild(btn);
     containerE.addChild(retrato());
     containerE.addChild(urso);
     containerE.addChild(carro);
@@ -86,19 +95,19 @@ function jogoDasFormas()
 function arrastar(evt)
 {
         var o = evt.target;    
-        //console.log(evt.type);
+        
         if(evt.type == "click")
         {
-            
-            o.parent.addChild(o);
-            o.offset = {x: o.x - evt.stageX, y: o.y - evt.stageY};
+            evt.target.parent.addChild(evt.target);
+            evt.target.offset = {x: evt.target.x - evt.stageX, y: evt.target.y - evt.stageY};
+            console.log(evt.offset);
         }
         else if(evt.type == "pressmove")
         {
             if(!evt.target.colou)
             {
-                o.x = evt.stageX + o.offset.x;
-                o.y = evt.stageY + o.offset.y;
+                evt.target.x = evt.stageX + evt.target.offset.x;
+                evt.target.y = evt.stageY + evt.target.offset.y;
                 update = true;
 		  }
         }
@@ -121,6 +130,7 @@ function arrastar(evt)
                 stage.update();
 		  }
         }
+        stage.update();
 	}
 
 function bitmapCollide(bitma)

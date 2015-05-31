@@ -43,6 +43,7 @@ function jogoDaMemoria()
 
 function evt_voltaSala1(evt)
 {
+    cartas_viradas = 0;
     if(evt.type == "click")
         trocaTela(sala1());
 }
@@ -50,8 +51,8 @@ function evt_voltaSala1(evt)
 function shuffle(cs, co)
 {
      //Um array para as cartas simbolos e objetos
-    var pos = [[50, 25], [306, 25], [562, 25], [818, 25], [1074, 25],
-               [50, 350], [306, 350], [562, 350], [818, 350], [1074, 350]];
+    var pos = [[50.8, 25], [296.6, 25], [542.4, 25], [788.2, 25], [1034, 25],
+               [50.8, 350],[296.6, 350], [542.4, 350], [788.2, 350], [1034, 350]];
     var i = 0, j, card, cardE;
     for(i; i < cs.length; i++)
     {
@@ -141,7 +142,7 @@ function atualizaCartas(evt)
             memoria.push(evt.target.pai);            
             evt.target.pai.setMarcada(true);
             evt.target.pai.setAnimation("flip");
-            //playSoundCarta();
+            playSoundCarta();
         }
         else if(cartas_viradas == 1)
         {
@@ -149,7 +150,7 @@ function atualizaCartas(evt)
             memoria.push(evt.target.pai);            
             evt.target.pai.setMarcada(true);
             evt.target.pai.setAnimation("flip");
-            //playSoundCarta();
+            playSoundCarta();
             if(memoria[0]._valor == memoria[1]._valor)
             {
                 cartas_viradas = 0;
@@ -175,8 +176,7 @@ function timer_JogoDaMemoria()
     memoria = [];     
 }
 
-//function playSoundCarta()
-//{
-//    console.loog("teste");
-//    createjs.Sound.play(flipSound);
-//}
+function playSoundCarta()
+{
+    createjs.Sound.play("sound_flipCarta",{volume:0.5});
+}
