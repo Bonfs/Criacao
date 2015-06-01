@@ -29,6 +29,8 @@ function carregarArquivos()
             {id: "sala1_bau", src: "images/bau.png"},
             {id: "sala1_jogoMemoria", src: "images/jogo_da_memoria.png"},
             {id: "sala1_bola", src: "images/bolamove2.png"},
+            {id: "sala1_trem", src: "images/trenzinhoanimacao.png"},
+            {id: "sala1_boneca", src: "images/bonecaanimacao.png"},
             {id: "sala1", src: "images/sala1.png"},
             {id: "retrato", src: "images/retrato.png"},
             {id: "memoria", src: "images/minijo-memoria.png"},
@@ -42,7 +44,8 @@ function carregarArquivos()
             {id: "encaixe_carro_sombra", src: "images/carro sombra.png"},
             {id: "encaixe_btn", src: "images/encaixe_btnVolta.png"},
             {id: "sound_telaInicial", src: "sons/bg_telaInicial.mp3"},
-            {id: "sound_flipCarta", src: "sons/page-flip-01a.mp3"}
+            {id: "sound_flipCarta", src: "sons/page-flip-01a.mp3"},
+            {id: "sound_trem", src: "sons/trenzinhoanimacao.mp3"}
         ]);
      //createjs.Sound.registerSound(preload.getResult("sound_telaInicial"));
 }
@@ -63,7 +66,7 @@ function tick() {stage.update();}
 function tela_inicial()
 {
     var container = new createjs.Container();
-    //createjs.Sound.play("sound_telaInicial",{loop:-1, volume: 0.6});
+    createjs.Sound.play("sound_telaInicial",{loop:-1, volume: 0.6});
     
     var background = new createjs.Bitmap(preload.getResult("telaInicialBG"));
     var play_inicial = new createjs.Bitmap(preload.getResult("btn-play"));
@@ -102,8 +105,8 @@ function telaAvatar()
     input.style.left = 0;
     document.getElementById("centro").appendChild(input);
     var html = new createjs.DOMElement(input);
-    html.x = 800;//485; não entendi as coordenadas do input =/
-    html.y = 840;
+    html.x = 750;//485; não entendi as coordenadas do input =/
+    html.y = 880;
     
     container.addChild(background);
     container.addChild(play_avancar);
@@ -183,20 +186,128 @@ function sala1()
             [1024, 512, 256, 256, 0, -142, -123]
         ],
         "animations":{
-            bolaGirando:[0, 34, "bolaParada"],
-            bolaParada:[0]
+            movendo:[0, 34, "parado"],
+            parado:[0]
         }
     }
     var bolaSheet = new createjs.SpriteSheet(bola);
-    var bolaAnima = new createjs.Sprite(bolaSheet, "bolaParada");
+    var bolaAnima = new createjs.Sprite(bolaSheet, "parado");
     bolaAnima.on("click", evt_animaBola);
     bolaAnima.x = 50;
     bolaAnima.y = 500;
+    
+    var tremData = {
+        "framerate":30,
+        "images":[preload.getResult("sala1_trem")],
+        "frames":[
+            [0, 0, 128, 64, 0, -176, -393],
+            [128, 0, 128, 64, 0, -176, -393],
+            [256, 0, 128, 64, 0, -176, -393],
+            [384, 0, 128, 64, 0, -176, -393],
+            [512, 0, 128, 64, 0, -176, -393],
+            [640, 0, 128, 64, 0, -176, -393],
+            [768, 0, 128, 64, 0, -176, -393],
+            [896, 0, 128, 64, 0, -176, -393],
+            [1024, 0, 128, 64, 0, -176, -393],
+            [1152, 0, 128, 64, 0, -176, -393],
+            [1280, 0, 128, 64, 0, -176, -393],
+            [1408, 0, 128, 64, 0, -176, -393],
+            [1536, 0, 128, 64, 0, -176, -393],
+            [1664, 0, 128, 64, 0, -176, -393],
+            [1792, 0, 128, 64, 0, -176, -393],
+            [0, 64, 128, 64, 0, -176, -393],
+            [128, 64, 128, 64, 0, -176, -393],
+            [256, 64, 128, 64, 0, -176, -393],
+            [384, 64, 128, 64, 0, -176, -393],
+            [512, 64, 128, 64, 0, -176, -393],
+            [640, 64, 128, 64, 0, -176, -393],
+            [768, 64, 128, 64, 0, -176, -393],
+            [896, 64, 128, 64, 0, -176, -393],
+            [1024, 64, 128, 64, 0, -176, -393],
+            [1152, 64, 128, 64, 0, -176, -393],
+            [1280, 64, 128, 64, 0, -176, -393],
+            [1408, 64, 128, 64, 0, -176, -393],
+            [1536, 64, 128, 64, 0, -176, -393],
+            [1664, 64, 128, 64, 0, -176, -393],
+            [1792, 64, 128, 64, 0, -176, -393],
+            [0, 128, 128, 64, 0, -176, -393],
+            [128, 128, 128, 64, 0, -176, -393],
+            [256, 128, 128, 64, 0, -176, -393],
+            [384, 128, 128, 64, 0, -176, -393],
+            [512, 128, 128, 64, 0, -176, -393]
+        ],
+        "animations":{
+            parado: [0],
+            movendo: [0, 34, "parado"]
+         }
+        }
+    var tremFrames = new createjs.SpriteSheet(tremData);
+    var tremAnima = new createjs.Sprite(tremFrames, "parado");
+    tremAnima.x = -30;
+    tremAnima.y = 10;
+    tremAnima.on("click", evt_animaTrem);
+    
+    
+    var bonecaData = {
+            "framerate":24,
+            "images":[preload.getResult("sala1_boneca")],
+            "frames":[
+            [0, 0, 64, 64, 0, -398, -363],
+            [64, 0, 64, 64, 0, -398, -363],
+            [128, 0, 64, 64, 0, -398, -363],
+            [192, 0, 64, 64, 0, -398, -363],
+            [256, 0, 64, 64, 0, -398, -363],
+            [320, 0, 64, 64, 0, -398, -363],
+            [384, 0, 64, 64, 0, -398, -363],
+            [448, 0, 64, 64, 0, -398, -363],
+            [512, 0, 64, 64, 0, -398, -363],
+            [576, 0, 64, 64, 0, -398, -363],
+            [640, 0, 64, 64, 0, -398, -363],
+            [704, 0, 64, 64, 0, -398, -363],
+            [768, 0, 64, 64, 0, -398, -363],
+            [832, 0, 64, 64, 0, -398, -363],
+            [896, 0, 64, 64, 0, -398, -363],
+            [0, 64, 64, 64, 0, -398, -363],
+            [64, 64, 64, 64, 0, -398, -363],
+            [128, 64, 64, 64, 0, -398, -363],
+            [192, 64, 64, 64, 0, -398, -363],
+            [256, 64, 64, 64, 0, -398, -363],
+            [320, 64, 64, 64, 0, -398, -363],
+            [384, 64, 64, 64, 0, -398, -363],
+            [448, 64, 64, 64, 0, -398, -363],
+            [512, 64, 64, 64, 0, -398, -363],
+            [576, 64, 64, 64, 0, -398, -363],
+            [640, 64, 64, 64, 0, -398, -363],
+            [704, 64, 64, 64, 0, -398, -363],
+            [768, 64, 64, 64, 0, -398, -363],
+            [832, 64, 64, 64, 0, -398, -363],
+            [896, 64, 64, 64, 0, -398, -363],
+            [0, 128, 64, 64, 0, -398, -363],
+            [64, 128, 64, 64, 0, -398, -363],
+            [128, 128, 64, 64, 0, -398, -363],
+            [192, 128, 64, 64, 0, -398, -363],
+            [256, 128, 64, 64, 0, -398, -363],
+            [320, 128, 64, 64, 0, -398, -363],
+            [384, 128, 64, 64, 0, -398, -363],
+            [448, 128, 64, 64, 0, -398, -363],
+            [512, 128, 64, 64, 0, -398, -363],
+            [576, 128, 64, 64, 0, -398, -363]
+            ],
+            "animations":{
+                parado: [0],
+                movendo: [0, 39, "parado"]
+            }
+        }
+    var bonecaFrames = new createjs.SpriteSheet(bonecaData);
+    var bonecaAnima = new createjs.Sprite(bonecaFrames, "parado");
+    bonecaAnima.on("click", evt_animaBola);
     
     container.addChild(background);
     container.addChild(bau);
     container.addChild(jogo);
     container.addChild(bolaAnima);
+    container.addChild(bonecaAnima);
+    container.addChild(tremAnima);
     container.addChild(retrato());
     return container;
 }
@@ -204,7 +315,16 @@ function sala1()
 function evt_animaBola(evt)
 {
     if(evt.type == "click")
-        evt.target.gotoAndPlay("bolaGirando");
+        evt.target.gotoAndPlay("movendo");
+}
+
+function evt_animaTrem(evt)
+{
+    if(evt.type == "click")
+    {
+        evt.target.gotoAndPlay("movendo");
+        createjs.Sound.play("sound_trem");
+    }
 }
 
 function evt_chamaJogoDaMemoria(evt)
@@ -238,8 +358,8 @@ function retrato()
     //background.y = stage.canvas.height/2;
     
     var nomeCrianca = new createjs.Text(nome.toUpperCase(), "40px Arial", "#000");
-    nomeCrianca.x = 750;
-    nomeCrianca.y = 850;
+    nomeCrianca.x = 700;
+    nomeCrianca.y = 855;
     
     container.addChild(background);
     container.addChild(nomeCrianca);
