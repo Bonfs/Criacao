@@ -123,10 +123,8 @@ function arrastar(evt)
                 containerE.removeChild(sombras[0]);
                 //imagens.splice(0,1);
                 sombras.splice(0,1);
-                //forma2.x = can.width/2 - forma2.getBounds().width*1.5;
-                //forma2.y = can.height/2 - forma2.getBounds().height;
-                //containerE.addChild(imagens[0]);
                 containerE.addChild(sombras[0]);
+                createjs.Sound.play("sound_encaixe",{volume: 0.5});
                 stage.update();
 		  }
         }

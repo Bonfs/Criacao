@@ -1,4 +1,5 @@
 var stage, preload, nome;
+var msala1 = false;
 
 //Containers que serão as telas da plataforma
 //var telaInicial;
@@ -44,10 +45,14 @@ function carregarArquivos()
             {id: "encaixe_carro_sombra", src: "images/carro sombra.png"},
             {id: "encaixe_btn", src: "images/encaixe_btnVolta.png"},
             {id: "sound_telaInicial", src: "sons/bg_telaInicial.mp3"},
+            {id: "sound_sala1", src: "sons/musica_de_fundo3.mp3"},
+            {id: "sound_sala2", src: "sons/musica_de_fundo2.mp3"},
+            {id: "sound_sala3", src: "sons/musica_de_fundo1.mp3"},
             {id: "sound_flipCarta", src: "sons/page-flip-01a.mp3"},
-            {id: "sound_trem", src: "sons/trenzinhoanimacao.mp3"}
+            {id: "sound_trem", src: "sons/trenzinhoanimacao.mp3"},
+            {id: "sound_memoriaFim", src: "sons/acerto_jogo_da memoria.mp3"},
+            {id: "sound_encaixe", src: "sons/acerto_bau.mp3"}
         ]);
-     //createjs.Sound.registerSound(preload.getResult("sound_telaInicial"));
 }
 
 function init()
@@ -132,6 +137,13 @@ function evt_telaAvatar(evt)
 //Tela da primeira área(sala1)
 function sala1()
 {
+    
+    if(!msala1)
+    {
+        createjs.Sound.stop();
+        createjs.Sound.play("sound_sala1",{loop:-1, volume: 0.6});
+        msala1 = true;
+    }
     var container = new createjs.Container();
     var background = new createjs.Bitmap(preload.getResult("sala1"));
     var bau = new createjs.Bitmap(preload.getResult("sala1_bau"));

@@ -155,6 +155,7 @@ function atualizaCartas(evt)
             {
                 cartas_viradas = 0;
                 memoria = [];
+                createjs.Sound.play("sound_memoriaFim",{volume: 0.5});
             }
             else if (memoria[0]._valor != memoria[1]._valor)
             {
@@ -178,5 +179,5 @@ function timer_JogoDaMemoria()
 
 function playSoundCarta()
 {
-    createjs.Sound.play("sound_flipCarta",{volume:0.5});
+    createjs.Sound.play("sound_flipCarta",{volume:0.3});
 }
