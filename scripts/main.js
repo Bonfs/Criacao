@@ -13,48 +13,48 @@ function carregarArquivos()
     //preload.installPlugin(createjs.Sound);
     preload.on("complete", init, this);
     preload.loadManifest([
-            {id: "tela_inicial0", src: "images/telaInicial/tela_inicial_0.png"},
-            {id: "tela_inicial1", src: "images/telaInicial/tela_inicial_1.png"},
-            {id: "tela_inicial2", src: "images/telaInicial/tela_inicial_2.png"},
-            {id: "tela_inicial3", src: "images/telaInicial/tela_inicial_3.png"},
-            {id: "tela_inicial4", src: "images/telaInicial/tela_inicial_4.png"},
-            {id: "tela_inicial5", src: "images/telaInicial/tela_inicial_5.png"},
-            {id: "tela_inicial6", src: "images/telaInicial/tela_inicial_6.png"},
-            {id: "tela_inicial7", src: "images/telaInicial/tela_inicial_7.png"},
-            {id: "tela_inicial8", src: "images/telaInicial/tela_inicial_8.png"},
-            {id: "tela_inicial9", src: "images/telaInicial/tela_inicial_9.png"},
-            {id: "tela_inicial10", src: "images/telaInicial/tela_inicial_10.png"},
-            {id: "tela_inicial11", src: "images/telaInicial/tela_inicial_11.png"},
-            {id: "tela_inicial12", src: "images/telaInicial/tela_inicial_12.png"},
-            {id: "tela_inicial13", src: "images/telaInicial/tela_inicial_13.png"},
-            {id: "tela_inicial14", src: "images/telaInicial/tela_inicial_14.png"},
-            {id: "tela_inicial15", src: "images/telaInicial/tela_inicial_15.png"},
-            {id: "tela_inicial16", src: "images/telaInicial/tela_inicial_16.png"},
-            {id: "tela_inicial17", src: "images/telaInicial/tela_inicial_17.png"},
-            {id: "tela_inicial18", src: "images/telaInicial/tela_inicial_18.png"},
-            {id: "tela_inicial19", src: "images/telaInicial/tela_inicial_19.png"},
-            {id: "tela_inicial20", src: "images/telaInicial/tela_inicial_20.png"},
-            {id: "tela_inicial21", src: "images/telaInicial/tela_inicial_21.png"},
-            {id: "tela_inicial22", src: "images/telaInicial/tela_inicial_22.png"},
-            {id: "tela_inicial23", src: "images/telaInicial/tela_inicial_23.png"},
-            {id: "tela_inicial24", src: "images/telaInicial/tela_inicial_24.png"},
-            {id: "tela_inicial25", src: "images/telaInicial/tela_inicial_25.png"},
-            {id: "tela_inicial26", src: "images/telaInicial/tela_inicial_26.png"},
-            {id: "tela_inicial27", src: "images/telaInicial/tela_inicial_27.png"},
-            {id: "tela_inicial28", src: "images/telaInicial/tela_inicial_28.png"},
-            {id: "tela_inicial29", src: "images/telaInicial/tela_inicial_29.png"},
-            {id: "tela_inicial30", src: "images/telaInicial/tela_inicial_30.png"},
-            {id: "tela_inicial31", src: "images/telaInicial/tela_inicial_31.png"},
-            {id: "tela_inicial32", src: "images/telaInicial/tela_inicial_32.png"},
-            {id: "tela_inicial33", src: "images/telaInicial/tela_inicial_33.png"},
-            {id: "tela_inicial34", src: "images/telaInicial/tela_inicial_34.png"},
-            {id: "tela_inicial35", src: "images/telaInicial/tela_inicial_35.png"},
-            {id: "tela_inicial36", src: "images/telaInicial/tela_inicial_36.png"},
-            {id: "tela_inicial37", src: "images/telaInicial/tela_inicial_37.png"},
-            {id: "tela_inicial38", src: "images/telaInicial/tela_inicial_38.png"},
-            {id: "tela_inicial39", src: "images/telaInicial/tela_inicial_39.png"},
-            {id: "tela_inicial40", src: "images/telaInicial/tela_inicial_40.png"},
-            {id: "tela_inicial41", src: "images/telaInicial/tela_inicial_41.png"},
+            {id: "tela_inicial0", src: "images/telaInicial/tela_inicial_0.jpg"},
+            {id: "tela_inicial1", src: "images/telaInicial/tela_inicial_1.jpg"},
+            {id: "tela_inicial2", src: "images/telaInicial/tela_inicial_2.jpg"},
+            {id: "tela_inicial3", src: "images/telaInicial/tela_inicial_3.jpg"},
+            {id: "tela_inicial4", src: "images/telaInicial/tela_inicial_4.jpg"},
+            {id: "tela_inicial5", src: "images/telaInicial/tela_inicial_5.jpg"},
+            {id: "tela_inicial6", src: "images/telaInicial/tela_inicial_6.jpg"},
+            {id: "tela_inicial7", src: "images/telaInicial/tela_inicial_7.jpg"},
+            {id: "tela_inicial8", src: "images/telaInicial/tela_inicial_8.jpg"},
+            {id: "tela_inicial9", src: "images/telaInicial/tela_inicial_9.jpg"},
+            {id: "tela_inicial10", src: "images/telaInicial/tela_inicial_10.jpg"},
+            {id: "tela_inicial11", src: "images/telaInicial/tela_inicial_11.jpg"},
+            {id: "tela_inicial12", src: "images/telaInicial/tela_inicial_12.jpg"},
+            {id: "tela_inicial13", src: "images/telaInicial/tela_inicial_13.jpg"},
+            {id: "tela_inicial14", src: "images/telaInicial/tela_inicial_14.jpg"},
+            {id: "tela_inicial15", src: "images/telaInicial/tela_inicial_15.jpg"},
+            {id: "tela_inicial16", src: "images/telaInicial/tela_inicial_16.jpg"},
+            {id: "tela_inicial17", src: "images/telaInicial/tela_inicial_17.jpg"},
+            {id: "tela_inicial18", src: "images/telaInicial/tela_inicial_18.jpg"},
+            {id: "tela_inicial19", src: "images/telaInicial/tela_inicial_19.jpg"},
+            {id: "tela_inicial20", src: "images/telaInicial/tela_inicial_20.jpg"},
+            {id: "tela_inicial21", src: "images/telaInicial/tela_inicial_21.jpg"},
+            {id: "tela_inicial22", src: "images/telaInicial/tela_inicial_22.jpg"},
+            {id: "tela_inicial23", src: "images/telaInicial/tela_inicial_23.jpg"},
+            {id: "tela_inicial24", src: "images/telaInicial/tela_inicial_24.jpg"},
+            {id: "tela_inicial25", src: "images/telaInicial/tela_inicial_25.jpg"},
+            {id: "tela_inicial26", src: "images/telaInicial/tela_inicial_26.jpg"},
+            {id: "tela_inicial27", src: "images/telaInicial/tela_inicial_27.jpg"},
+            {id: "tela_inicial28", src: "images/telaInicial/tela_inicial_28.jpg"},
+            {id: "tela_inicial29", src: "images/telaInicial/tela_inicial_29.jpg"},
+            {id: "tela_inicial30", src: "images/telaInicial/tela_inicial_30.jpg"},
+            {id: "tela_inicial31", src: "images/telaInicial/tela_inicial_31.jpg"},
+            {id: "tela_inicial32", src: "images/telaInicial/tela_inicial_32.jpg"},
+            {id: "tela_inicial33", src: "images/telaInicial/tela_inicial_33.jpg"},
+            {id: "tela_inicial34", src: "images/telaInicial/tela_inicial_34.jpg"},
+            {id: "tela_inicial35", src: "images/telaInicial/tela_inicial_35.jpg"},
+            {id: "tela_inicial36", src: "images/telaInicial/tela_inicial_36.jpg"},
+            {id: "tela_inicial37", src: "images/telaInicial/tela_inicial_37.jpg"},
+            {id: "tela_inicial38", src: "images/telaInicial/tela_inicial_38.jpg"},
+            {id: "tela_inicial39", src: "images/telaInicial/tela_inicial_39.jpg"},
+            {id: "tela_inicial40", src: "images/telaInicial/tela_inicial_40.jpg"},
+            {id: "tela_inicial41", src: "images/telaInicial/tela_inicial_41.jpg"},
             {id: "carta_metal", src: "images/carta_metal.png"},
             {id: "carta_organico", src: "images/carta_organico.png"},
             {id: "carta_papel", src: "images/carta_papel.png"},
@@ -295,15 +295,17 @@ function telaAvatar()
     
     var input = document.createElement('input');
     input.id = 'input';
-    input.style.height = '20px';
-    input.style.width = '200px';
-    //input.style.position = "absolute";
+    input.style.height = '50px';
+    input.style.width = '500px';
+    input.style.position = "absolute";
+    input.placeholder = "NOME";
+    input.autofocus;
     input.style.top = 0;
     input.style.left = 0;
     document.getElementById("centro").appendChild(input);
     var html = new createjs.DOMElement(input);
     html.x = 750;//485; não entendi as coordenadas do input =/
-    html.y = 880;
+    html.y = 865;
     
     container.addChild(background);
     container.addChild(play_avancar);

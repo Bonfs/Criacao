@@ -63,7 +63,7 @@ function jogoDasFormas()
     //boneca.offset = {};
     //boneca.offset.x = -100;
    // boneca.offset.y = -100;
-    boneca.on("click", arrastar);
+   // boneca.on("click", arrastar);
     boneca.on("pressmove", arrastar);
     boneca.on("pressup", arrastar);
     boneca.name = "boneca";
@@ -83,10 +83,11 @@ function jogoDasFormas()
     containerE.addChild(fundo);
     containerE.addChild(btn);
     containerE.addChild(retrato());
+    containerE.addChild(urso_sombra);
     containerE.addChild(urso);
     containerE.addChild(carro);
     containerE.addChild(boneca);
-    containerE.addChild(urso_sombra);
+    
     
     return containerE;
 }
@@ -106,8 +107,9 @@ function arrastar(evt)
         {
             if(!evt.target.colou)
             {
-                evt.target.x = evt.stageX + evt.target.offset.x;
-                evt.target.y = evt.stageY + evt.target.offset.y;
+                evt.target.x = evt.stageX - 100;
+                evt.target.y = evt.stageY  - 90;
+                //stage.update();
                 update = true;
 		  }
         }
@@ -121,14 +123,18 @@ function arrastar(evt)
                 evt.target.colou = true;
                 containerE.removeChild(evt.target);
                 containerE.removeChild(sombras[0]);
+                createjs.Sound.play("sound_encaixe",{volume: 0.5});
                 //imagens.splice(0,1);
                 sombras.splice(0,1);
-                containerE.addChild(sombras[0]);
-                createjs.Sound.play("sound_encaixe",{volume: 0.5});
+                if(sombras.length != 0)
+                {
+                    containerE.addChildAt(sombras[0], 1);
+                    console.log("teste");
+                }
                 stage.update();
 		  }
         }
-        stage.update();
+        //stage.update();
 	}
 
 function bitmapCollide(bitma)
