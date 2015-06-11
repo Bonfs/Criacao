@@ -8,6 +8,7 @@ Carta.prototype._carta_animation = null;  //sprite[back, front, flip, flipvolta]
 Carta.prototype._valor = null;            //valor da carta para comparação   
 Carta.prototype.x = null;
 Carta.prototype.y = null;
+Carta.prototype.som = null;
 
 
 //Métodos(não tem 'GET')

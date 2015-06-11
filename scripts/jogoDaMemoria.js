@@ -21,6 +21,13 @@ function jogoDaMemoria()
                               preload.getResult("carta_vidro_objeto"),
                               preload.getResult("carta_organico_objeto")
                              ];
+    
+    sound_enderecos = ["sound_metal",
+                       "sound_papel",
+                       "sound_plastico",
+                       "sound_vidro",
+                       "sound_residuo_organico"
+                      ];
 
 
     //simbolos
@@ -108,6 +115,7 @@ function shuffle(cs, co)
            
             j = Math.floor(Math.random() * pos.length);
             card = new Carta();
+            card.som = sound_enderecos[i];
             card.setXY(pos[j]);
             card.setCarta(data);
             card.setCartaAnimation();
@@ -116,6 +124,7 @@ function shuffle(cs, co)
             
             j = Math.floor(Math.random() * pos.length);
             cardE = new Carta();
+            cardE.som = sound_enderecos[i];
             cardE.setXY(pos[j]);
             cardE.setCarta(data2);
             cardE.setCartaAnimation();
@@ -139,18 +148,22 @@ function atualizaCartas(evt)
         if(cartas_viradas == 0)
         {
             cartas_viradas++;
+            console.log(evt.target.pai.som);
             memoria.push(evt.target.pai);            
             evt.target.pai.setMarcada(true);
             evt.target.pai.setAnimation("flip");
-            playSoundCarta();
+            //playSoundCarta();
+            createjs.Sound.play(evt.target.pai.som,{volume:0.3});
         }
         else if(cartas_viradas == 1)
         {
             cartas_viradas++;
+            console.log(evt.target.pai.som);
             memoria.push(evt.target.pai);            
             evt.target.pai.setMarcada(true);
             evt.target.pai.setAnimation("flip");
-            playSoundCarta();
+            //playSoundCarta();
+            createjs.Sound.play(evt.target.pai.som,{volume:0.3});
             if(memoria[0]._valor == memoria[1]._valor)
             {
                 cartas_viradas = 0;

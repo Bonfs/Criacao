@@ -96,6 +96,11 @@ function carregarArquivos()
             {id: "sound_memoriaFim", src: "sons/acerto_jogo_da memoria.mp3"},
             {id: "sound_encaixe", src: "sons/acerto_bau.mp3"},
             {id: "sound_bolaQuicando", src: "sons/bolaQuicando.mp3"},
+            {id: "sound_metal", src: "sons/metal.mp3"},
+            {id: "sound_papel", src: "sons/papel.mp3"},
+            {id: "sound_plastico", src: "sons/plastico.mp3"},
+            {id: "sound_residuo_organico", src: "sons/residuo_organico.mp3"},
+            {id: "sound_vidro", src: "sons/vidro.mp3"}
         ]);
 }
 
