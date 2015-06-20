@@ -1,6 +1,7 @@
 //Autor: Lucas Paulino 
 //Modificado por Matheus Bonfim
 var imagens = [], urso, urso_sombra, boneca, boneca_sombra, carro, carro_sombra, containerE;
+var animacoes = [];
 var sombras = [];
 function jogoDasFormas()
 {
@@ -80,9 +81,76 @@ function jogoDasFormas()
     sombras.push(carro_sombra);
     sombras.push(boneca_sombra);
     
+    var dadosUrso = {
+         "framerate": 2,
+         "images": [
+                    preload.getResult("encaixe_urso_anima1"),
+                    preload.getResult("encaixe_urso_anima2"),
+                    preload.getResult("encaixe_urso_anima3"),
+                    preload.getResult("encaixe_urso_anima4")],
+         "frames":[
+                    [146, 175, 593, 576, 0],
+                    [146, 175, 593, 576, 1],
+                    [146, 175, 593, 576, 2],
+                    [146, 175, 593, 576, 3]],
+        "animations":{
+                    guardar: [0, 3, false]
+                    
+        }
+    };
+    var ursoSprite = new createjs.SpriteSheet(dadosUrso);
+    animacoes[0] = new createjs.Sprite(ursoSprite, "guardar"); 
+    animacoes[0].x = 147;
+    animacoes[0].y = 175;
+    
+    var dadosCarro = {
+        "framerate": 2,
+         "images": [
+                    preload.getResult("encaixe_carro_anima1"),
+                    preload.getResult("encaixe_carro_anima2"),
+                    preload.getResult("encaixe_carro_anima3"),
+                    preload.getResult("encaixe_carro_anima4")],
+         "frames":[
+                    [146, 175, 593, 576, 0],
+                    [146, 175, 593, 576, 1],
+                    [146, 175, 593, 576, 2],
+                    [146, 175, 593, 576, 3]],
+        "animations":{
+                    guardar: [0, 3, false]
+                    
+        }
+    }
+    var carroSprite = new createjs.SpriteSheet(dadosCarro);
+    animacoes[1] = new createjs.Sprite(carroSprite, "guardar");
+    animacoes[1].x = 147;
+    animacoes[1].y = 175;
+    //boneca_anima1
+    var dadosBoneca = {
+        "framerate": 2,
+         "images": [
+                    preload.getResult("encaixe_boneca_anima1"),
+                    preload.getResult("encaixe_boneca_anima2"),
+                    preload.getResult("encaixe_boneca_anima3"),
+                    preload.getResult("encaixe_boneca_anima4")],
+         "frames":[
+                    [146, 175, 593, 576, 0],
+                    [146, 175, 593, 576, 1],
+                    [146, 175, 593, 576, 2],
+                    [146, 175, 593, 576, 3]],
+        "animations":{
+                    guardar: [0, 3, false]
+                    
+        }
+    }
+    var bonecaSprite = new createjs.SpriteSheet(dadosBoneca);
+    animacoes[2] = new createjs.Sprite(bonecaSprite, "guardar");
+    animacoes[2].x = 147;
+    animacoes[2].y = 175;
+        
+    
     containerE.addChild(fundo);
     containerE.addChild(btn);
-    containerE.addChild(retrato());
+    //containerE.addChild(retrato());
     containerE.addChild(urso_sombra);
     containerE.addChild(urso);
     containerE.addChild(carro);
@@ -125,13 +193,15 @@ function arrastar(evt)
                 containerE.removeChild(sombras[0]);
                 createjs.Sound.play("sound_encaixe",{volume: 0.5});
                 //imagens.splice(0,1);
-                sombras.splice(0,1);
-                if(sombras.length != 0)
-                {
-                    containerE.addChildAt(sombras[0], 1);
-                    console.log("teste");
-                }
-                stage.update();
+//                sombras.splice(0,1);
+//                if(sombras.length != 0)
+//                {
+//                    containerE.addChildAt(sombras[0], 1);
+//                    console.log("teste");
+//                }
+//                stage.update();
+                containerE.addChildAt(animacoes[0], 1)
+                setTimeout(timer_jogoDasFormas, 1000, evt.target);
 		  }
         }
         //stage.update();
@@ -169,16 +239,18 @@ function bitmapCollide(bitma)
 		return false;
 }
 
-function timer_jogoDasFormas()
+function timer_jogoDasFormas(toy)
 {
-    evt.target.x = sombras[0].x;
-    evt.target.y = sombras[0].y;
-    evt.target.colou = true;
-    containerE.removeChild(evt.target);
-    containerE.removeChild(sombras[0]);
-    imagens.splice(0,1);
+    //containerE.removeChild(toy);
+    //containerE.removeChild(sombras[0]);
     sombras.splice(0,1);
-    containerE.addChild(imagens[0]);
-    containerE.addChild(sombras[0]);
+    if(sombras.length != 0)
+    {
+        containerE.removeChild(animacoes[0]);
+        containerE.addChildAt(sombras[0], 1);
+       
+        //console.log("teste");
+    }
+    animacoes.splice(0, 1);
     stage.update();
 }
