@@ -1,6 +1,7 @@
-var container;
+var container, tutoVideo;
 var cartas_viradas = 0;
 var memoria = [];
+var executouTutorial = false;
 
 var img_enderecos_simbolos, img_enderecos_objetos;
 
@@ -40,10 +41,22 @@ function jogoDaMemoria()
     var fundo = new createjs.Bitmap(preload.getResult("memoria"));
     var btn = new createjs.Bitmap(preload.getResult("memoria_btn"));
     btn.on("click", evt_voltaSala1);
+    
+    var video = document.createElement('video');
+    video.src = "video/tutorial.mp4";
+    video.autoplay = !executouTutorial;
+    tutoVideo = new createjs.Bitmap(video);
+    
     container.addChild(fundo);
     container.addChild(btn);
     container.addChild(retrato());
+    
     shuffle(carta_simbolos, carta_objetos);
+    if(!executouTutorial)
+    {
+        container.addChild(tutoVideo);
+        setTimeout(removeTutotial, 27000);
+    }
     
     return container;
 }
@@ -193,4 +206,10 @@ function timer_JogoDaMemoria()
 function playSoundCarta()
 {
     createjs.Sound.play("sound_flipCarta",{volume:0.3});
+}
+
+function removeTutotial()
+{
+    container.removeChild(tutoVideo);
+    executouTutorial = true;
 }
