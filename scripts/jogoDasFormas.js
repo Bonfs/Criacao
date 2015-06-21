@@ -1,10 +1,12 @@
 //Autor: Lucas Paulino 
 //Modificado por Matheus Bonfim
-var imagens = [], urso, urso_sombra, boneca, boneca_sombra, carro, carro_sombra, containerE;
+var imagens = [], urso, urso_sombra, boneca, boneca_sombra, carro, carro_sombra, containerE, tutoVideoBau;
 var animacoes = [];
 var sombras = [];
+var executouBau = false;
 function jogoDasFormas()
 {
+    sombras = [];
     containerE = new createjs.Container();
     var fundo = new createjs.Bitmap(preload.getResult("encaixe_fundo"));
     
@@ -146,6 +148,11 @@ function jogoDasFormas()
     animacoes[2] = new createjs.Sprite(bonecaSprite, "guardar");
     animacoes[2].x = 147;
     animacoes[2].y = 175;
+    
+    var video = document.createElement('video');
+    video.src = "video/Tutorial-JogodoBau.mp4";
+    video.autoplay = !executouBau;
+    tutoVideoBau = new createjs.Bitmap(video);
         
     
     containerE.addChild(fundo);
@@ -155,6 +162,11 @@ function jogoDasFormas()
     containerE.addChild(urso);
     containerE.addChild(carro);
     containerE.addChild(boneca);
+    if(!executouBau)
+    {
+        containerE.addChild(tutoVideoBau);
+        setTimeout(removeVideoBau, 10000);
+    }
     
     
     return containerE;
@@ -253,4 +265,10 @@ function timer_jogoDasFormas(toy)
     }
     animacoes.splice(0, 1);
     stage.update();
+}
+
+function removeVideoBau(params) 
+{
+    containerE.removeChild(tutoVideoBau);
+    executouBau = true;
 }

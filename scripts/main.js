@@ -1,6 +1,9 @@
-var stage, preload, nome;
+var stage, preload, nome, play_avancar;
 var msala1 = false;
-
+var borda = new createjs.Shape();
+borda.graphics.beginStroke("#A03B89");//#C1272D #A4A1F0 #A03B89 #ED87D5 #f62a32
+borda.graphics.setStrokeStyle(6);
+borda.graphics.drawEllipse(0,0,292, 307);
 //Containers que serão as telas da plataforma
 //var telaInicial;
 
@@ -69,6 +72,13 @@ function carregarArquivos()
             {id: "btn-play2", src: "images/btn-play2.png"},
             {id: "telaInicialBG", src: "images/telaInicial.jpg"},
             {id: "tela_avatar", src: "images/placeholder_Selecao.png"},
+            {id: "tela_avatar_barra", src: "images/barra.png"},
+            {id: "tela_avatar_crianca1", src: "images/Escolher-Avatar02.png"},
+            {id: "tela_avatar_crianca2", src: "images/Escolher-Avatar01.png"},
+            {id: "tela_avatar_crianca3", src: "images/Escolher-Avatar03.png"},
+            {id: "tela_avatar_crianca4", src: "images/Escolher-Avatar04.png"},
+            {id: "tela_avatar_crianca5", src: "images/Escolher-Avatar05.png"},
+            {id: "tela_avatar_crianca6", src: "images/Escolher-Avatar06.png"},
             {id: "sala1_bau", src: "images/bau.png"},
             {id: "sala1_jogoMemoria", src: "images/jogo_da_memoria.png"},
             {id: "sala1_bola", src: "images/bolamove2.png"},
@@ -76,6 +86,12 @@ function carregarArquivos()
             {id: "sala1_boneca", src: "images/bonecaanimacao.png"},
             {id: "sala1", src: "images/sala1.png"},
             {id: "retrato", src: "images/retrato.png"},
+            {id: "retrato_valor1", src: "images/icon-personagem-01.png"},
+            {id: "retrato_valor2", src: "images/icon-personagem-02.png"},
+            {id: "retrato_valor3", src: "images/icon-personagem-03.png"},
+            {id: "retrato_valor4", src: "images/icon-personagem-04.png"},
+            {id: "retrato_valor5", src: "images/icon-personagem-05.png"},
+            {id: "retrato_valor6", src: "images/icon-personagem-06.png"},
             {id: "memoria", src: "images/minijo-memoria.png"},
             {id: "memoria_btn", src: "images/memoria_btnVolta.png"},
             {id: "encaixe_fundo", src: "images/mini-jogo-bau.png"},
@@ -302,13 +318,31 @@ function timer_telaInicial()
 //Tela de criação do personagem(avatar)
 function telaAvatar()
 {
-    var container = new createjs.Container();
+    container = new createjs.Container();
     
-    var background = new createjs.Bitmap(preload.getResult("tela_avatar"));
-    var play_avancar = new createjs.Bitmap(preload.getResult("btn-play2"));
+    var background = new createjs.Bitmap(preload.getResult("tela_avatar"));//cor do fundo 9AED87
+    play_avancar = new createjs.Bitmap(preload.getResult("btn-play2"));
     play_avancar.on("click", evt_telaAvatar);
-    play_avancar.x = 950;
-    play_avancar.y = 770;
+    var barra = new createjs.Bitmap(preload.getResult("tela_avatar_barra")); 
+    var crianca1 = new createjs.Bitmap(preload.getResult("tela_avatar_crianca1"));
+    crianca1.valor = 1;
+    crianca1.on("click", evt_selecaoAvatar);
+    console.log(crianca1.x);
+    var crianca2 = new createjs.Bitmap(preload.getResult("tela_avatar_crianca2"));
+    crianca2.valor = 2;
+    crianca2.on("click", evt_selecaoAvatar);
+    var crianca3 = new createjs.Bitmap(preload.getResult("tela_avatar_crianca3"));
+    crianca3.valor = 3;
+    crianca3.on("click", evt_selecaoAvatar);
+    var crianca4 = new createjs.Bitmap(preload.getResult("tela_avatar_crianca4"));
+    crianca4.valor = 4;
+    crianca4.on("click", evt_selecaoAvatar);
+    var crianca5 = new createjs.Bitmap(preload.getResult("tela_avatar_crianca5"));
+    crianca5.valor = 5;
+    crianca5.on("click", evt_selecaoAvatar);
+    var crianca6 = new createjs.Bitmap(preload.getResult("tela_avatar_crianca6"));
+    crianca6.valor = 6;
+    crianca6.on("click", evt_selecaoAvatar);
     
     var input = document.createElement('input');
     input.id = 'input';
@@ -321,11 +355,18 @@ function telaAvatar()
     input.style.left = 0;
     document.getElementById("centro").appendChild(input);
     var html = new createjs.DOMElement(input);
-    html.x = 750;//485; não entendi as coordenadas do input =/
-    html.y = 865;
+    html.x = 635;//485; não entendi as coordenadas do input =/
+    html.y = 825;
     
     container.addChild(background);
+    container.addChild(barra);
     container.addChild(play_avancar);
+    container.addChild(crianca1);
+    container.addChild(crianca2);
+    container.addChild(crianca3);
+    container.addChild(crianca4);
+    container.addChild(crianca5);
+    container.addChild(crianca6);
     container.addChild(html);
     
     return container;
@@ -333,12 +374,47 @@ function telaAvatar()
 
 function evt_telaAvatar(evt)
 {
-    if(document.getElementById("input").value != "" && evt.type == "click")
+    if(document.getElementById("input").value != "" && evt.type == "click" && play_avancar.valor != undefined)
     {
         nome = document.getElementById("input").value
         document.getElementById("input").style.visibility = "hidden";
         trocaTela(sala1());
     }
+}
+
+function evt_selecaoAvatar(evt)
+{
+    play_avancar.valor = evt.target.valor;
+    if(!container.contains(borda))
+        container.addChild(borda);
+    switch(play_avancar.valor)
+    {
+        case 1:
+            borda.x = 100;
+            borda.y = 67;
+        break;
+        case 2:
+            borda.x = 491;
+            borda.y = 67;
+        break;
+        case 3:
+            borda.x = 884;
+            borda.y = 67;
+        break;
+        case 4:
+            borda.x = 100;
+            borda.y = 405;
+        break;
+        case 5:
+            borda.x = 491;
+            borda.y = 405;
+        break;
+        case 6:
+            borda.x = 884;
+            borda.y = 405;
+        break;
+    }
+    //console.log(evt.target.valor);
 }
 
 //------------------------------------*
@@ -400,9 +476,11 @@ function sala1()
     }
     var bolaSheet = new createjs.SpriteSheet(bola);
     var bolaAnima = new createjs.Sprite(bolaSheet, "parado");
+    bolaAnima.scaleX = 1.5;
+    bolaAnima.scaleY = 1.5;
     bolaAnima.on("click", evt_animaBola);
-    bolaAnima.x = 50;
-    bolaAnima.y = 500;
+    bolaAnima.x = -170;
+    bolaAnima.y = 360;
     
     var tremData = {
         "framerate":30,
@@ -451,8 +529,10 @@ function sala1()
         }
     var tremFrames = new createjs.SpriteSheet(tremData);
     var tremAnima = new createjs.Sprite(tremFrames, "parado");
-    tremAnima.x = -30;
-    tremAnima.y = 10;
+    tremAnima.scaleX = 1.8;
+    tremAnima.scaleY = 1.8;
+    tremAnima.x = 130;
+    tremAnima.y = -30;
     tremAnima.on("click", evt_animaTrem);
     
     
@@ -508,6 +588,10 @@ function sala1()
         }
     var bonecaFrames = new createjs.SpriteSheet(bonecaData);
     var bonecaAnima = new createjs.Sprite(bonecaFrames, "parado");
+    bonecaAnima.scaleX = 1.7;
+    bonecaAnima.scaleY = 1.7;
+    bonecaAnima.x = -600;
+    bonecaAnima.y = -90;
     bonecaAnima.on("click", evt_animaBoneca);
     
     container.addChild(background);
@@ -568,15 +652,15 @@ function trocaTela(cont)
 function retrato()
 {
     var container = new createjs.Container();
-    var background = new createjs.Bitmap(preload.getResult("retrato"));
+    var background = new createjs.Bitmap(preload.getResult("retrato_valor"+play_avancar.valor));
     //background.scaleX = 0.5;
     //background.scaleY = 0.5;
     //background.x = stage.canvas.width/2;
     //background.y = stage.canvas.height/2;
     
     var nomeCrianca = new createjs.Text(nome.toUpperCase(), "40px Arial", "#000");
-    nomeCrianca.x = 700;
-    nomeCrianca.y = 855;
+    nomeCrianca.x = 750;
+    nomeCrianca.y = 850;
     
     container.addChild(background);
     container.addChild(nomeCrianca);
