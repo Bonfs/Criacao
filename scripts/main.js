@@ -58,8 +58,8 @@ function carregarArquivos()
             {id: "tela_inicial39", src: "images/telaInicial/tela_inicial_39.jpg"},
             {id: "tela_inicial40", src: "images/telaInicial/tela_inicial_40.jpg"},
             {id: "tela_inicial41", src: "images/telaInicial/tela_inicial_41.jpg"},
-            {id: "animacao_introdutoria", src: "images/CenaProfAluno.png"},
-            {id: "animacao_introdutoria2", src: "images/CenaProfAluno2.png"},
+            {id: "animacao_introdutoria3", src: "images/CenaProfAluno3.png"},
+            {id: "animacao_introdutoria4", src: "images/CenaProfAluno4.png"},
             {id: "carta_metal", src: "images/carta_metal.png"},
             {id: "carta_organico", src: "images/carta_organico.png"},
             {id: "carta_papel", src: "images/carta_papel.png"},
@@ -318,16 +318,21 @@ function tela_inicial()
     return container;
 }
 
-function evtTela_inicial(evt)
+function evtTela_inicial()
 {
-    if(evt.type = "click")
+    //if(evt.type = "click")
         trocaTela(telaAvatar());
+}
+function evtTela_animacaoIntroducao()
+{
+    //if(evt.type = "click")
+        trocaTela(animacaoIntroducao());
 }
 
 function timer_telaInicial()
 {
     var play_inicial = new createjs.Bitmap(preload.getResult("btn-play"));
-    play_inicial.on("click", evtTela_inicial);
+    play_inicial.on("click", evtTela_animacaoIntroducao);
     play_inicial.y = 1;
     play_inicial.x = 1;
     stage.addChild(play_inicial);
@@ -337,12 +342,13 @@ function timer_telaInicial()
 //Animação introdutória
 function animacaoIntroducao()
 {
+    createjs.Sound.stop();
     container = new createjs.Container();
     var animacaoDados = {
         "framerate": 1,
         "images":[
-                    preload.getResult("animacao_introdutoria"),
-                    preload.getResult("animacao_introdutoria2"),
+                    preload.getResult("animacao_introdutoria3"),
+                    preload.getResult("animacao_introdutoria4")
         ],
         "frames":[
                     [0,0, 1280, 960, 0],
@@ -350,32 +356,31 @@ function animacaoIntroducao()
         ],
         "animations":{
                     cena1: 0,
-                    cena2: 1 
+                    cena2: 1
         }
     }
     var sprite = new createjs.SpriteSheet(animacaoDados);
     animacaoIntro = new createjs.Sprite(sprite, "cena1");
-    setTimeout(trocaCena2, 5000);
+    setTimeout(trocaCena2, 7900);
     
     container.addChild(animacaoIntro);
+    createjs.Sound.play("sound_introCrianca");
     
     return container;
 }
 function trocaCena2()
 {
     animacaoIntro.gotoAndPlay("cena2");
+    setTimeout(evtTela_inicial, 4150);
 }
-function trocaCena3()
-{
-    animacaoIntro.gotoAndStop("cena3");
-}
+
 //------------------------------------*
 
 //Tela de criação do personagem(avatar)
 function telaAvatar()
 {
     container = new createjs.Container();
-    
+     createjs.Sound.play("sound_telaInicial2",{volume: 0.4, loop: -1});
     var background = new createjs.Bitmap(preload.getResult("tela_avatar"));//cor do fundo 9AED87
     play_avancar = new createjs.Bitmap(preload.getResult("btn-play2"));
     play_avancar.on("click", evt_telaAvatar);
