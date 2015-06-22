@@ -1,7 +1,7 @@
-var stage, preload, nome, play_avancar;
+var stage, canvas,preload, nome, play_avancar, animacaoIntro;
 var msala1 = false;
 var borda = new createjs.Shape();
-borda.graphics.beginStroke("#A03B89");//#C1272D #A4A1F0 #A03B89 #ED87D5 #f62a32
+borda.graphics.beginStroke("#f62a32");//#C1272D #A4A1F0 #A03B89 #ED87D5 #f62a32
 borda.graphics.setStrokeStyle(6);
 borda.graphics.drawEllipse(0,0,292, 307);
 //Containers que serão as telas da plataforma
@@ -58,6 +58,8 @@ function carregarArquivos()
             {id: "tela_inicial39", src: "images/telaInicial/tela_inicial_39.jpg"},
             {id: "tela_inicial40", src: "images/telaInicial/tela_inicial_40.jpg"},
             {id: "tela_inicial41", src: "images/telaInicial/tela_inicial_41.jpg"},
+            {id: "animacao_introdutoria", src: "images/CenaProfAluno.png"},
+            {id: "animacao_introdutoria2", src: "images/CenaProfAluno2.png"},
             {id: "carta_metal", src: "images/carta_metal.png"},
             {id: "carta_organico", src: "images/carta_organico.png"},
             {id: "carta_papel", src: "images/carta_papel.png"},
@@ -82,8 +84,24 @@ function carregarArquivos()
             {id: "sala1_bau", src: "images/bau.png"},
             {id: "sala1_jogoMemoria", src: "images/jogo_da_memoria.png"},
             {id: "sala1_bola", src: "images/bolamove2.png"},
+            {id: "sala1_bola_brilho1", src: "images/bola1.png"},
+            {id: "sala1_bola_brilho2", src: "images/bola2.png"},
+            {id: "sala1_bola_brilho3", src: "images/bola3.png"},
             {id: "sala1_trem", src: "images/trenzinhoanimacao.png"},
             {id: "sala1_boneca", src: "images/bonecaanimacao.png"},
+            {id: "sala1_boneca1", src: "images/InteracaoBoneca/boneca1.png"},
+            {id: "sala1_boneca2", src: "images/InteracaoBoneca/boneca2.png"},
+            {id: "sala1_boneca3", src: "images/InteracaoBoneca/boneca3.png"},
+            {id: "sala1_boneca4", src: "images/InteracaoBoneca/boneca4.png"},
+            {id: "sala1_boneca5", src: "images/InteracaoBoneca/boneca5.png"},
+            {id: "sala1_boneca6", src: "images/InteracaoBoneca/boneca6.png"},
+            {id: "sala1_boneca7", src: "images/InteracaoBoneca/boneca7.png"},
+            {id: "sala1_boneca8", src: "images/InteracaoBoneca/boneca8.png"},
+            {id: "sala1_boneca9", src: "images/InteracaoBoneca/boneca9.png"},
+            {id: "sala1_boneca10", src: "images/InteracaoBoneca/boneca10.png"},
+            {id: "sala1_boneca_brilhando1", src: "images/InteracaoBoneca/bonecabrilhando1.png"},
+            {id: "sala1_boneca_brilhando2", src: "images/InteracaoBoneca/bonecabrilhando2.png"},
+            {id: "sala1_boneca_brilhando3", src: "images/InteracaoBoneca/bonecabrilhando3.png"},
             {id: "sala1", src: "images/sala1.png"},
             {id: "retrato", src: "images/retrato.png"},
             {id: "retrato_valor1", src: "images/icon-personagem-01.png"},
@@ -128,13 +146,14 @@ function carregarArquivos()
             {id: "sound_papel", src: "sons/papel.mp3"},
             {id: "sound_plastico", src: "sons/plastico.mp3"},
             {id: "sound_residuo_organico", src: "sons/residuo_organico.mp3"},
-            {id: "sound_vidro", src: "sons/vidro.mp3"}
+            {id: "sound_vidro", src: "sons/vidro.mp3"},
+            {id: "sound_introCrianca", src: "sons/introCrianca.mp3"}
         ]);
 }
 
 function init()
 {
-    
+    canvas = document.getElementById("canvas");
     stage = new createjs.Stage("canvas");
     stage.addChild(tela_inicial());
     stage.update();
@@ -315,6 +334,43 @@ function timer_telaInicial()
 }
 //------------------------------------*
 
+//Animação introdutória
+function animacaoIntroducao()
+{
+    container = new createjs.Container();
+    var animacaoDados = {
+        "framerate": 1,
+        "images":[
+                    preload.getResult("animacao_introdutoria"),
+                    preload.getResult("animacao_introdutoria2"),
+        ],
+        "frames":[
+                    [0,0, 1280, 960, 0],
+                    [0,0, 1280, 960, 1]
+        ],
+        "animations":{
+                    cena1: 0,
+                    cena2: 1 
+        }
+    }
+    var sprite = new createjs.SpriteSheet(animacaoDados);
+    animacaoIntro = new createjs.Sprite(sprite, "cena1");
+    setTimeout(trocaCena2, 5000);
+    
+    container.addChild(animacaoIntro);
+    
+    return container;
+}
+function trocaCena2()
+{
+    animacaoIntro.gotoAndPlay("cena2");
+}
+function trocaCena3()
+{
+    animacaoIntro.gotoAndStop("cena3");
+}
+//------------------------------------*
+
 //Tela de criação do personagem(avatar)
 function telaAvatar()
 {
@@ -355,8 +411,8 @@ function telaAvatar()
     input.style.left = 0;
     document.getElementById("centro").appendChild(input);
     var html = new createjs.DOMElement(input);
-    html.x = 635;//485; não entendi as coordenadas do input =/
-    html.y = 825;
+    html.x = 0.5*canvas.width;//635  485; não entendi as coordenadas do input =/
+    html.y = 0.86*canvas.height;//825
     
     container.addChild(background);
     container.addChild(barra);
@@ -370,7 +426,7 @@ function telaAvatar()
     container.addChild(html);
     
     return container;
-}
+    }
 
 function evt_telaAvatar(evt)
 {
@@ -446,152 +502,141 @@ function sala1()
     
     var bola = {
         "framerate":24,
-        "images":[preload.getResult("sala1_bola")],
+        "images":[preload.getResult("sala1_bola"),
+                  preload.getResult("sala1_bola_brilho1"),
+                  preload.getResult("sala1_bola_brilho2"),
+                  preload.getResult("sala1_bola_brilho3")],
         "frames":[
-            [0, 0, 128, 128, 0, -241, -140],
-            [128, 0, 128, 128, 0, -241, -140],
-            [256, 0, 128, 128, 0, -241, -140],
-            [384, 0, 128, 128, 0, -241, -140],
-            [512, 0, 128, 128, 0, -241, -140],
-            [640, 0, 128, 128, 0, -241, -140],
-            [768, 0, 128, 128, 0, -241, -140],
-            [896, 0, 128, 128, 0, -241, -140],
-            [1024, 0, 128, 128, 0, -241, -140],
-            [1152, 0, 128, 128, 0, -241, -140],
-            [1280, 0, 128, 128, 0, -241, -140],
-            [1408, 0, 128, 128, 0, -241, -140],
-            [1536, 0, 128, 128, 0, -241, -140],
-            [1664, 0, 128, 128, 0, -241, -140],
-            [1792, 0, 128, 128, 0, -241, -140],
-            [0, 128, 128, 128, 0, -241, -140],
-            [128, 128, 128, 128, 0, -241, -140],
-            [256, 128, 128, 128, 0, -241, -140],
-            [384, 128, 128, 128, 0, -241, -140],
-            [512, 128, 128, 128, 0, -241, -140]
+            [0, 0, 256, 256, 0, -149, -74],
+            [256, 0, 256, 256, 0, -149, -74],
+            [512, 0, 256, 256, 0, -149, -74],
+            [768, 0, 256, 256, 0, -149, -74],
+            [1024, 0, 256, 256, 0, -149, -74],
+            [1280, 0, 256, 256, 0, -149, -74],
+            [1536, 0, 256, 256, 0, -149, -74],
+            [0, 256, 256, 256, 0, -149, -74],
+            [256, 256, 256, 256, 0, -149, -74],
+            [512, 256, 256, 256, 0, -149, -74],
+            [768, 256, 256, 256, 0, -149, -74],
+            [1024, 256, 256, 256, 0, -149, -74],
+            [1280, 256, 256, 256, 0, -149, -74],
+            [1536, 256, 256, 256, 0, -149, -74],
+            [0, 512, 256, 256, 0, -149, -74],
+            [256, 512, 256, 256, 0, -149, -74],
+            [512, 512, 256, 256, 0, -149, -74],
+            [768, 512, 256, 256, 0, -149, -74],
+            [1024, 512, 256, 256, 0, -149, -74],
+            [1280, 512, 256, 256, 0, -149, -74],
+            [1536, 512, 256, 256, 0, -149, -74],
+            [0, 768, 256, 256, 0, -149, -74],
+            [256, 768, 256, 256, 0, -149, -74]
         ],
         "animations":{
-            movendo:[0, 19, "parado"],
-            parado:[0]
+            movendo:[3, 22, "parado"],
+            parado:{
+                frames:[0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2],
+                speed: 0.6
+            }
         }
     }
     var bolaSheet = new createjs.SpriteSheet(bola);
     var bolaAnima = new createjs.Sprite(bolaSheet, "parado");
-    bolaAnima.scaleX = 1.5;
-    bolaAnima.scaleY = 1.5;
+    //bolaAnima.scaleX = 1.5;
+    //bolaAnima.scaleY = 1.5;
     bolaAnima.on("click", evt_animaBola);
-    bolaAnima.x = -170;
-    bolaAnima.y = 360;
+    bolaAnima.x = -30;
+    bolaAnima.y = 495;
     
     var tremData = {
-        "framerate":30,
+        "framerate": 10,
         "images":[preload.getResult("sala1_trem")],
         "frames":[
-            [0, 0, 128, 64, 0, -176, -393],
-            [128, 0, 128, 64, 0, -176, -393],
-            [256, 0, 128, 64, 0, -176, -393],
-            [384, 0, 128, 64, 0, -176, -393],
-            [512, 0, 128, 64, 0, -176, -393],
-            [640, 0, 128, 64, 0, -176, -393],
-            [768, 0, 128, 64, 0, -176, -393],
-            [896, 0, 128, 64, 0, -176, -393],
-            [1024, 0, 128, 64, 0, -176, -393],
-            [1152, 0, 128, 64, 0, -176, -393],
-            [1280, 0, 128, 64, 0, -176, -393],
-            [1408, 0, 128, 64, 0, -176, -393],
-            [1536, 0, 128, 64, 0, -176, -393],
-            [1664, 0, 128, 64, 0, -176, -393],
-            [1792, 0, 128, 64, 0, -176, -393],
-            [0, 64, 128, 64, 0, -176, -393],
-            [128, 64, 128, 64, 0, -176, -393],
-            [256, 64, 128, 64, 0, -176, -393],
-            [384, 64, 128, 64, 0, -176, -393],
-            [512, 64, 128, 64, 0, -176, -393],
-            [640, 64, 128, 64, 0, -176, -393],
-            [768, 64, 128, 64, 0, -176, -393],
-            [896, 64, 128, 64, 0, -176, -393],
-            [1024, 64, 128, 64, 0, -176, -393],
-            [1152, 64, 128, 64, 0, -176, -393],
-            [1280, 64, 128, 64, 0, -176, -393],
-            [1408, 64, 128, 64, 0, -176, -393],
-            [1536, 64, 128, 64, 0, -176, -393],
-            [1664, 64, 128, 64, 0, -176, -393],
-            [1792, 64, 128, 64, 0, -176, -393],
-            [0, 128, 128, 64, 0, -176, -393],
-            [128, 128, 128, 64, 0, -176, -393],
-            [256, 128, 128, 64, 0, -176, -393],
-            [384, 128, 128, 64, 0, -176, -393],
-            [512, 128, 128, 64, 0, -176, -393]
+            [0, 0, 512, 512, 0, -43, -49],
+            [512, 0, 512, 512, 0, -43, -49],
+            [1024, 0, 512, 512, 0, -43, -49],
+            [1536, 0, 512, 512, 0, -43, -49],
+            [2048, 0, 512, 512, 0, -43, -49],
+            [2560, 0, 512, 512, 0, -43, -49],
+            [3072, 0, 512, 512, 0, -43, -49],
+            [0, 512, 512, 512, 0, -43, -49],
+            [512, 512, 512, 512, 0, -43, -49],
+            [1024, 512, 512, 512, 0, -43, -49],
+            [1536, 512, 512, 512, 0, -43, -49],
+            [2048, 512, 512, 512, 0, -43, -49],
+            [2560, 512, 512, 512, 0, -43, -49],
+            [3072, 512, 512, 512, 0, -43, -49],
+            [0, 1024, 512, 512, 0, -43, -49]
         ],
         "animations":{
-            parado: [0],
-            movendo: [0, 34, "parado"]
+            parado: {
+                frames:[0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2],
+                speed: 0.5
+            },
+            movendo: {
+                frames:[0, 14],
+                next: "parado",
+                speed: 0.2
+            }
          }
         }
     var tremFrames = new createjs.SpriteSheet(tremData);
     var tremAnima = new createjs.Sprite(tremFrames, "parado");
-    tremAnima.scaleX = 1.8;
-    tremAnima.scaleY = 1.8;
-    tremAnima.x = 130;
-    tremAnima.y = -30;
+    tremAnima.scaleX = 0.3;
+    tremAnima.scaleY = 0.3;
+    tremAnima.x = 437;
+    tremAnima.y = 655;
     tremAnima.on("click", evt_animaTrem);
     
     
     var bonecaData = {
-            "framerate":24,
-            "images":[preload.getResult("sala1_boneca")],
+            "framerate":5,
+            "images":[preload.getResult("sala1_boneca1"),
+                      preload.getResult("sala1_boneca2"),
+                      preload.getResult("sala1_boneca3"),
+                      preload.getResult("sala1_boneca4"),
+                      preload.getResult("sala1_boneca5"),
+                      preload.getResult("sala1_boneca6"),
+                      preload.getResult("sala1_boneca7"),
+                      preload.getResult("sala1_boneca8"),
+                      preload.getResult("sala1_boneca9"),
+                      preload.getResult("sala1_boneca10"),
+                      preload.getResult("sala1_boneca_brilhando1"),
+                      preload.getResult("sala1_boneca_brilhando2"),
+                      preload.getResult("sala1_boneca_brilhando3")
+                     ],
             "frames":[
-            [0, 0, 64, 64, 0, -398, -363],
-            [64, 0, 64, 64, 0, -398, -363],
-            [128, 0, 64, 64, 0, -398, -363],
-            [192, 0, 64, 64, 0, -398, -363],
-            [256, 0, 64, 64, 0, -398, -363],
-            [320, 0, 64, 64, 0, -398, -363],
-            [384, 0, 64, 64, 0, -398, -363],
-            [448, 0, 64, 64, 0, -398, -363],
-            [512, 0, 64, 64, 0, -398, -363],
-            [576, 0, 64, 64, 0, -398, -363],
-            [640, 0, 64, 64, 0, -398, -363],
-            [704, 0, 64, 64, 0, -398, -363],
-            [768, 0, 64, 64, 0, -398, -363],
-            [832, 0, 64, 64, 0, -398, -363],
-            [896, 0, 64, 64, 0, -398, -363],
-            [0, 64, 64, 64, 0, -398, -363],
-            [64, 64, 64, 64, 0, -398, -363],
-            [128, 64, 64, 64, 0, -398, -363],
-            [192, 64, 64, 64, 0, -398, -363],
-            [256, 64, 64, 64, 0, -398, -363],
-            [320, 64, 64, 64, 0, -398, -363],
-            [384, 64, 64, 64, 0, -398, -363],
-            [448, 64, 64, 64, 0, -398, -363],
-            [512, 64, 64, 64, 0, -398, -363],
-            [576, 64, 64, 64, 0, -398, -363],
-            [640, 64, 64, 64, 0, -398, -363],
-            [704, 64, 64, 64, 0, -398, -363],
-            [768, 64, 64, 64, 0, -398, -363],
-            [832, 64, 64, 64, 0, -398, -363],
-            [896, 64, 64, 64, 0, -398, -363],
-            [0, 128, 64, 64, 0, -398, -363],
-            [64, 128, 64, 64, 0, -398, -363],
-            [128, 128, 64, 64, 0, -398, -363],
-            [192, 128, 64, 64, 0, -398, -363],
-            [256, 128, 64, 64, 0, -398, -363],
-            [320, 128, 64, 64, 0, -398, -363],
-            [384, 128, 64, 64, 0, -398, -363],
-            [448, 128, 64, 64, 0, -398, -363],
-            [512, 128, 64, 64, 0, -398, -363],
-            [576, 128, 64, 64, 0, -398, -363]
+            [424, 15, 336, 581, 0],
+            [424, 15, 336, 581, 1],
+            [424, 15, 336, 581, 2],
+            [424, 15, 336, 581, 3],
+            [424, 15, 336, 581, 4],
+            [424, 15, 336, 581, 5],
+            [424, 15, 336, 581, 6],
+            [424, 15, 336, 581, 7],
+            [424, 15, 336, 581, 8],
+            [424, 15, 336, 581, 9],
+            [424, 15, 336, 581, 10],
+            [424, 15, 336, 581, 11],
+            [424, 15, 336, 581, 12],
             ],
             "animations":{
-                parado: [0],
-                movendo: [0, 39, "parado"]
+                parado: {
+                        frames:[10, 10, 10, 10, 11, 11, 11, 11, 12, 12 ,12 ,12],
+                        speed: 0.4
+                },
+                movendo: {
+                         frames:[0, 9, 0, 9],
+                         next: "parado",
+                         speed: 0.2
+                }
             }
         }
     var bonecaFrames = new createjs.SpriteSheet(bonecaData);
     var bonecaAnima = new createjs.Sprite(bonecaFrames, "parado");
-    bonecaAnima.scaleX = 1.7;
-    bonecaAnima.scaleY = 1.7;
-    bonecaAnima.x = -600;
-    bonecaAnima.y = -90;
+    bonecaAnima.scaleX = 0.15;
+    bonecaAnima.scaleY = 0.15;
+    bonecaAnima.x = 80;
+    bonecaAnima.y = 535;
     bonecaAnima.on("click", evt_animaBoneca);
     
     container.addChild(background);
@@ -658,7 +703,7 @@ function retrato()
     //background.x = stage.canvas.width/2;
     //background.y = stage.canvas.height/2;
     
-    var nomeCrianca = new createjs.Text(nome.toUpperCase(), "40px Arial", "#000");
+    var nomeCrianca = new createjs.Text(nome.toUpperCase(), "40px Poetsen", "#000");
     nomeCrianca.x = 750;
     nomeCrianca.y = 850;
     

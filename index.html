@@ -3,6 +3,20 @@
 <head>
 	<meta charset="utf-8"/>
 	<title>Criação</title>
+    <style>
+        @font-face{
+            font-family:"Poetsen";
+            src:url('fontes/PoetsenOne-Regular.ttf')format("truetype");
+        }
+        .poetsenOne-Regular{
+            font-family:"Poetsen";
+        }
+        #input
+        {
+            font-size:50px;
+            font-family:"Poetsen";
+        }
+    </style>
 	<script src="scripts/easeljs-0.8.1.min.js"></script>
     <script src="scripts/preloadjs-0.6.1.min.js"></script>
     <!--script src="https://code.createjs.com/tweenjs-0.6.0.min.js"></script-->
@@ -11,13 +25,6 @@
     <script src="scripts/jogoDasFormas.js"></script>
     <script src="scripts/jogoDaMemoria.js"></script>
     <script src="scripts/main.js"></script>
-    
-    <style>
-        #input
-        {
-            font-size:50px;
-        }
-    </style>
 </head>
 
 <body onload="carregarArquivos()">
