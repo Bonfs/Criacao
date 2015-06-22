@@ -1,11 +1,13 @@
+//Nome: CRIAÇÃO
+//Desenvolvido pela equipe Aquarela do curso de Sistemas e Mídias Digitais
+//Blog: http://aquarelasmd.wix.com/aquarela
+
 var stage, canvas,preload, nome, play_avancar, animacaoIntro;
 var msala1 = false;
 var borda = new createjs.Shape();
 borda.graphics.beginStroke("#f62a32");//#C1272D #A4A1F0 #A03B89 #ED87D5 #f62a32
 borda.graphics.setStrokeStyle(6);
 borda.graphics.drawEllipse(0,0,292, 307);
-//Containers que serão as telas da plataforma
-//var telaInicial;
 
 //Carrega TODOS os arquivos do projeto e chama a função 'init()'
 function carregarArquivos()
@@ -150,7 +152,7 @@ function carregarArquivos()
             {id: "sound_introCrianca", src: "sons/introCrianca.mp3"}
         ]);
 }
-
+//Carrega o stage e chama a função inicial
 function init()
 {
     canvas = document.getElementById("canvas");
@@ -159,8 +161,6 @@ function init()
     stage.update();
     createjs.Ticker.addEventListener("tick", tick);
 }
-
-
 function tick() {stage.update();}
 
 //Tela inical de play------------------*
@@ -481,8 +481,6 @@ function evt_selecaoAvatar(evt)
 
 //------------------------------------*
 
-
-
 //Tela da primeira área(sala1)
 function sala1()
 {
@@ -696,23 +694,21 @@ function evt_chamaJogoDasFormas(evt)
         trocaTela(jogoDasFormas());
 }
 
-
 //------------------------------------*
 
+//Troca de telas
 function trocaTela(cont)
 {
     stage.removeAllChildren()
     stage.addChild(cont);
 }
 
+//Retorna o retrato da criança e o seu escolhido na tela de avatar
 function retrato()
 {
     var container = new createjs.Container();
     var background = new createjs.Bitmap(preload.getResult("retrato_valor"+play_avancar.valor));
-    //background.scaleX = 0.5;
-    //background.scaleY = 0.5;
-    //background.x = stage.canvas.width/2;
-    //background.y = stage.canvas.height/2;
+
     
     var nomeCrianca = new createjs.Text(nome.toUpperCase(), "40px Poetsen", "#000");
     nomeCrianca.x = 750;
@@ -723,4 +719,3 @@ function retrato()
     
     return container;
 }
-//    document.getElementById("centro").appendChild(html);

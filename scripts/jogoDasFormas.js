@@ -1,9 +1,9 @@
-//Autor: Lucas Paulino 
-//Modificado por Matheus Bonfim
+//Código responsável pelo jogo das formas(Jogo do Baú).
 var imagens = [], urso, urso_sombra, boneca, boneca_sombra, carro, carro_sombra, containerE, tutoVideoBau;
 var animacoes = [];
 var sombras = [];
-var executouBau = false;
+var executouBau = false;            //controle do tutorial
+//Função que retorna o jogo das formas mais o tutorial
 function jogoDasFormas()
 {
     sombras = [];
@@ -63,10 +63,6 @@ function jogoDasFormas()
     boneca = new createjs.Bitmap(preload.getResult("encaixe_boneca"));
     boneca.scaleX = 0.6;
     boneca.scaleY = 0.6;
-    //boneca.offset = {};
-    //boneca.offset.x = -100;
-   // boneca.offset.y = -100;
-   // boneca.on("click", arrastar);
     boneca.on("pressmove", arrastar);
     boneca.on("pressup", arrastar);
     boneca.name = "boneca";
@@ -171,8 +167,7 @@ function jogoDasFormas()
     
     return containerE;
 }
-
-
+//Função responsável pelo 'Drag and Drop' dos brinquedos.
 function arrastar(evt)
 {
         var o = evt.target;    
@@ -204,21 +199,12 @@ function arrastar(evt)
                 containerE.removeChild(evt.target);
                 containerE.removeChild(sombras[0]);
                 createjs.Sound.play("sound_encaixe",{volume: 0.5});
-                //imagens.splice(0,1);
-//                sombras.splice(0,1);
-//                if(sombras.length != 0)
-//                {
-//                    containerE.addChildAt(sombras[0], 1);
-//                    console.log("teste");
-//                }
-//                stage.update();
                 containerE.addChildAt(animacoes[0], 1)
                 setTimeout(timer_jogoDasFormas, 1000, evt.target);
 		  }
         }
-        //stage.update();
 	}
-
+//Checa se as imagens, do brinquedo e da sombra, colidiram.
 function bitmapCollide(bitma)
 {
         var x_min = this.x;
@@ -250,23 +236,19 @@ function bitmapCollide(bitma)
 
 		return false;
 }
-
+//Função que remove a animação de guardar o brinquedo e adiciona a próxima sombra.
 function timer_jogoDasFormas(toy)
 {
-    //containerE.removeChild(toy);
-    //containerE.removeChild(sombras[0]);
     sombras.splice(0,1);
     if(sombras.length != 0)
     {
         containerE.removeChild(animacoes[0]);
         containerE.addChildAt(sombras[0], 1);
-       
-        //console.log("teste");
     }
     animacoes.splice(0, 1);
     stage.update();
 }
-
+//Função que remove o tutorial depois de executado.
 function removeVideoBau(params) 
 {
     containerE.removeChild(tutoVideoBau);
