@@ -149,7 +149,8 @@ function carregarArquivos()
             {id: "sound_plastico", src: "sons/plastico.mp3"},
             {id: "sound_residuo_organico", src: "sons/residuo_organico.mp3"},
             {id: "sound_vidro", src: "sons/vidro.mp3"},
-            {id: "sound_introCrianca", src: "sons/introCrianca.mp3"}
+            {id: "sound_introCrianca", src: "sons/introCrianca.mp3"},
+            {id: "sound_escolhaPersonagem", src: "sons/escolhaPersonagem.mp3"}
         ]);
 }
 //Carrega o stage e chama a função inicial
@@ -381,7 +382,8 @@ function trocaCena2()
 function telaAvatar()
 {
     container = new createjs.Container();
-     createjs.Sound.play("sound_telaInicial2",{volume: 0.4, loop: -1});
+    createjs.Sound.play("sound_telaInicial2",{volume: 0.4, loop: -1});
+    createjs.Sound.play("sound_escolhaPersonagem");
     var background = new createjs.Bitmap(preload.getResult("tela_avatar"));//cor do fundo 9AED87
     play_avancar = new createjs.Bitmap(preload.getResult("btn-play2"));
     play_avancar.on("click", evt_telaAvatar);
@@ -410,15 +412,15 @@ function telaAvatar()
     input.id = 'input';
     input.style.height = '50px';
     input.style.width = '500px';
-    input.style.position = "relative";
+    //input.style.position = "relative";
     input.placeholder = "NOME";
     input.autofocus;
     input.style.top = 0;
     input.style.left = 0;
     document.getElementById("centro").appendChild(input);
     var html = new createjs.DOMElement(input);
-    html.x = 0.5*canvas.width;//635  485; não entendi as coordenadas do input =/
-    html.y = 0.86*canvas.height;//825
+    html.x = 635;//635 0.5*canvas.width  485; não entendi as coordenadas do input =/
+    html.y = 825;//825 0.86*canvas.height
     
     container.addChild(background);
     container.addChild(barra);
@@ -711,7 +713,7 @@ function retrato()
 
     
     var nomeCrianca = new createjs.Text(nome.toUpperCase(), "40px Poetsen", "#000");
-    nomeCrianca.x = 750;
+    nomeCrianca.x = 765;
     nomeCrianca.y = 850;
     
     container.addChild(background);
